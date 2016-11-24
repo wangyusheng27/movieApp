@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
+
+import com.example.wys.movieapp.adapter.PictureAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.List;
  */
 public class MoviePictureFragment extends Fragment {
 
-    ArrayAdapter<ImageView> arrayAdapter = null;
-
+    PictureAdapter pictureAdapter = null;
+    ArrayAdapter<String> arrayAdapter = null;
     public MoviePictureFragment() {
     }
 
@@ -27,10 +28,13 @@ public class MoviePictureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        List<ImageView> temperatures = new ArrayList<>();
-        this.arrayAdapter = new ArrayAdapter<ImageView>(getActivity(), R.layout.grid_item_picture, R.id.grid_item_picture_imageView, temperatures);
+        List<String> temperatures = new ArrayList<>();
+        temperatures.add("http://i.imgur.com/DvpvklR.png1");
+        temperatures.add("http://i.imgur.com/DvpvklR.png2");
+        temperatures.add("http://i.imgur.com/DvpvklR.png3");
+        this.pictureAdapter = new PictureAdapter(getActivity(), R.layout.grid_item_picture, temperatures);
         GridView gridView = (GridView) rootView.findViewById(R.id.photo_wall);
-        gridView.setAdapter(arrayAdapter);
+        gridView.setAdapter(pictureAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
