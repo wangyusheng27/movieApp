@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.wys.movieapp.R;
+import com.example.wys.movieapp.model.SimpleMovieModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -16,13 +17,13 @@ import java.util.List;
  * Created by wys on 2016/11/24.
  */
 
-public class PictureAdapter extends ArrayAdapter<String>{
+public class PictureAdapter extends ArrayAdapter<SimpleMovieModel>{
 
     protected LayoutInflater mInflater;
     protected int res ;
 
 
-    public PictureAdapter(Context context, int resource, List<String> objects) {
+    public PictureAdapter(Context context, int resource, List<SimpleMovieModel> objects) {
         super(context, resource, objects);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         res = resource;
@@ -39,9 +40,9 @@ public class PictureAdapter extends ArrayAdapter<String>{
 
         ImageView image;
         image = (ImageView) view.findViewById(R.id.grid_item_picture_imageView);
-        String pictureurl = getItem(position);
+        SimpleMovieModel pictureurl = getItem(position);
         Context context = getContext();
-        Picasso.with(getContext()).load("http://i.imgur.com/DvpvklR.png").into(image);
+        Picasso.with(getContext()).load(pictureurl.getJuzhaoUrl()).into(image);
         return image;
     }
 }
