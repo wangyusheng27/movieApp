@@ -1,17 +1,14 @@
 package com.example.wys.movieapp;
 
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import com.example.wys.movieapp.adapter.PictureAdapter;
@@ -32,25 +29,44 @@ import java.util.List;
 public class MoviePictureFragment extends Fragment {
 
     PictureAdapter pictureAdapter = null;
+    ArrayList<SimpleMovieModel> moviesList = null;
+
     public MoviePictureFragment() {
     }
 
     @Override
-    public void onStart(){
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null || !savedInstanceState.containsKey("flavors")) {
+            moviesList = new ArrayList<SimpleMovieModel>();
+        } else {
+            Log.d(MoviePictureFragment.class.getSimpleName(), "get from saved");
+            moviesList = savedInstanceState.getParcelableArrayList("movies");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("movies", moviesList);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onStart() {
         super.onStart();
         updateMovieInfo();
     }
 
-    private void updateMovieInfo(){
+    private void updateMovieInfo() {
         DouBanApiTask updateMovieInfoTask = new DouBanApiTask();
         updateMovieInfoTask.execute();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        List<SimpleMovieModel> movies = new ArrayList<SimpleMovieModel>();
-        this.pictureAdapter = new PictureAdapter(getActivity(), R.layout.grid_item_picture, movies);
+        this.pictureAdapter = new PictureAdapter(getActivity(), R.layout.grid_item_picture, moviesList);
         GridView gridView = (GridView) rootView.findViewById(R.id.photo_wall);
         gridView.setAdapter(pictureAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,20 +100,20 @@ public class MoviePictureFragment extends Fragment {
                 result = "";
                 Log.e(DouBanApiTask.class.getSimpleName(), e.toString());
             }
-            List<SimpleMovieModel> jsonResult = null;
+            moviesList = null;
             try {
-                jsonResult = JsonUtil.getMovieData(result);
+                moviesList = JsonUtil.getMovieData(result);
             } catch (JSONException e) {
                 Log.e(DouBanApiTask.class.getSimpleName(), e.toString());
             }
-            return jsonResult;
+            return moviesList;
         }
 
         @Override
         protected void onPostExecute(List<SimpleMovieModel> result) {
-            if (result != null){
+            if (result != null) {
                 pictureAdapter.clear();
-                for (SimpleMovieModel res : result){
+                for (SimpleMovieModel res : result) {
                     pictureAdapter.add(res);
                 }
             }
