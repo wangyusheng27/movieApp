@@ -1,6 +1,10 @@
 package com.example.wys.movieapp;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,13 +77,11 @@ public class MoviePictureFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String forecast = arrayAdapter.getItem(position);
-//                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
-//                startActivity(intent);
+                SimpleMovieModel movieChoose = pictureAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, movieChoose.getName());
+                startActivity(intent);
             }
         });
-//        FetchWeatherTask weatherTask = new FetchWeatherTask();
-//        weatherTask.execute("1816670");
         return rootView;
     }
 
@@ -87,6 +89,9 @@ public class MoviePictureFragment extends Fragment {
 
         @Override
         protected List<SimpleMovieModel> doInBackground(String... strings) {
+            if (!isOnline()){
+                return new ArrayList<SimpleMovieModel>();
+            }
             String baseUrl = CommonConstants.DOUBAN_API_BASE + CommonConstants.MOVIE_IN_THEATERS;
             final String start = "start";
 
@@ -117,6 +122,12 @@ public class MoviePictureFragment extends Fragment {
                     pictureAdapter.add(res);
                 }
             }
+        }
+        public boolean isOnline() {
+            ConnectivityManager cm =
+                    (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            return netInfo != null && netInfo.isConnectedOrConnecting();
         }
     }
 }
