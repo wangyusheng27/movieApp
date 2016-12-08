@@ -8,13 +8,14 @@ import android.view.MenuItem;
 
 public class DetailActivity extends Activity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailFragment())
+                    .add(R.id.container2, new DetailFragment())
                     .commit();
         }
     }

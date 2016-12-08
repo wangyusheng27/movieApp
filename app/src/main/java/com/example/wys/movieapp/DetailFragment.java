@@ -8,17 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.wys.movieapp.adapter.PictureAdapter;
-import com.example.wys.movieapp.model.SimpleMovieModel;
-
-import java.util.ArrayList;
-
 /**
  * Created by wys on 2016/12/08.
  */
 public class DetailFragment extends Fragment {
 
     public DetailFragment() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -29,9 +25,10 @@ public class DetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        int i = 1;
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         Intent intent = getActivity().getIntent();
-        TextView textView = (TextView)rootView.findViewById(R.id.detail_text);
+        TextView textView = (TextView) rootView.findViewById(R.id.detail_text);
         textView.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
         return rootView;
     }
