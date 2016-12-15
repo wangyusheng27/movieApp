@@ -6,4 +6,5 @@ package com.example.wys.movieapp.utils;
 public class CommonConstants {
     public static final String DOUBAN_API_BASE = "https://api.douban.com";
     public static final String MOVIE_IN_THEATERS = "/v2/movie/in_theaters";
+    public static final String MOVIE_DATAIL = "/v2/movie/subject";
 }

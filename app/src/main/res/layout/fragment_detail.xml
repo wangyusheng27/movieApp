@@ -1,13 +1,94 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.wys.movieapp.DetailFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/detail_text" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="165dp"
+            android:text="120min"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/publish_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="145dp"
+            android:text="2016eeeeee" />
+
+        <TextView
+            android:id="@+id/rating_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="201dp"
+            android:layout_marginTop="205dp"
+            android:gravity="center_vertical"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="201dp"
+            android:layout_marginTop="185dp"
+            android:gravity="center_vertical"
+            android:text="8.1/10"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="201dp"
+            android:layout_marginTop="225dp"
+            android:gravity="center_vertical"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="370dp" />
+
+        <ImageView
+            android:id="@+id/detail_small_photo"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="140dp"
+            android:layout_toEndOf="@+id/intro"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_toEndOf="@+id/intro"
+            android:background="?android:attr/colorAccent"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dp"
+            android:text="你的名字"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp" />
+    </FrameLayout>
+
+</ScrollView>

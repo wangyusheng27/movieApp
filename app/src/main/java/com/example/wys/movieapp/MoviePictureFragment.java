@@ -78,7 +78,7 @@ public class MoviePictureFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SimpleMovieModel movieChoose = pictureAdapter.getItem(position);
-                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, movieChoose.getName());
+                Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEMPLATE, movieChoose);
                 startActivity(intent);
             }
         });
